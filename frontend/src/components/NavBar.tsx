@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Wallet, Wrench, Leaf, BookOpen, Search } from "lucide-react";
+import ConnectButton from "./ConnectButton";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,20 +89,17 @@ export default function NavBar() {
         </div>
 
         {/* Connect Wallet (desktop) */}
-        <div className="hidden md:block">
-          <button className="relative overflow-hidden bg-green-800 text-white px-6 py-3 rounded-full transition-all duration-500 flex items-center space-x-2 group shadow-lg">
-            {/* Glow effect */}
+        <div className=" ">
+          {/* <button className="relative overflow-hidden bg-green-800 text-white px-6 py-3 rounded-full transition-all duration-500 flex items-center space-x-2 group shadow-lg">
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-green-600 via-emerald-500 to-green-400 opacity-70 blur-xl group-hover:opacity-100 group-hover:blur-2xl transition-all duration-700"></span>
-            {/* Shine overlay */}
             <span className="absolute -left-20 top-0 h-full w-20 bg-white/20 rotate-12 group-hover:left-[120%] transition-all duration-700 ease-in-out"></span>
             <Wallet
               size={22}
               className="relative z-10 group-hover:rotate-12 transition-transform duration-500"
             />
-            <span className="relative z-10 font-semibold tracking-wide group-hover:tracking-widest transition-all duration-500">
-              Connect Wallet
-            </span>
-          </button>
+            <ConnectButton/>
+          </button> */}
+          <ConnectButton/>
         </div>
 
         {/* Mobile Menu Button */}
