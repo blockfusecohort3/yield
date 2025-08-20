@@ -4,7 +4,9 @@ export default function AddFarm() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const [farmLocation, setFarmLocation] = useState("");
   const [farmSize, setFarmSize] = useState("");
-  const [farmValuation, setFarmValuation] = useState("");
+  const [valuePerShare, setValuePerShare] = useState("");
+  const [totalShares, setTotalShares] = useState("");
+  const [availableShares, setAvailableShares] = useState("");
   const [farmImage, setFarmImage] = useState(null);
   const [fileKey, setFileKey] = useState(Date.now());
 
@@ -25,7 +27,7 @@ export default function AddFarm() {
       return;
     }
 
-    if (!farmLocation || !farmImage || !farmSize || !farmValuation) {
+    if (!farmLocation || !farmImage || !farmSize || !valuePerShare || !totalShares || !availableShares) {
       alert("Please provide all farm details.");
       return;
     }
@@ -37,7 +39,9 @@ export default function AddFarm() {
       farmerName: currentUser.fullName || `${currentUser.firstName} ${currentUser.lastName}`,
       farmLocation,
       farmSize,
-      farmValuation,
+      valuePerShare,
+      totalShares,
+      availableShares,
       farmImage,
     };
 
@@ -45,7 +49,9 @@ export default function AddFarm() {
 
     setFarmLocation("");
     setFarmSize("");
-    setFarmValuation("");
+    setValuePerShare("");
+    setTotalShares("");
+    setAvailableShares("");
     setFarmImage(null);
     setFileKey(Date.now());
     alert("Farm added successfully!");
@@ -84,9 +90,27 @@ export default function AddFarm() {
 
         <input
           type="number"
-          placeholder="Initial Valuation (₦)"
-          value={farmValuation}
-          onChange={(e) => setFarmValuation(e.target.value)}
+          placeholder="Value per Share (₦)"
+          value={valuePerShare}
+          onChange={(e) => setValuePerShare(e.target.value)}
+          required
+          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+
+        <input
+          type="number"
+          placeholder="Total Shares"
+          value={totalShares}
+          onChange={(e) => setTotalShares(e.target.value)}
+          required
+          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+
+        <input
+          type="number"
+          placeholder="Total Shares Available"
+          value={availableShares}
+          onChange={(e) => setAvailableShares(e.target.value)}
           required
           className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
         />

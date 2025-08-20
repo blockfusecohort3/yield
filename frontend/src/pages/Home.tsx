@@ -1,13 +1,7 @@
-import FarmerRegister from "./farmers/Register";
-import Browse from "./investors/Browse";
-import Farmerkyc from "./farmers/FarmerKyc";
+import React from 'react'
 
-export default function Home() {
+export const Home = () => {
   return (
-    <div>
-      <FarmerRegister />
-      <Browse />
-      <Farmerkyc />
-    </div>
-  );
+    <div>Home</div>
+  )
 }

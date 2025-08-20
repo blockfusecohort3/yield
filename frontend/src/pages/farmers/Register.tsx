@@ -10,18 +10,18 @@ export default function FarmerRegister() {
   });
   
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    if (error) setError(""); // Clear error on input
+    if (error) setError("");
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.firstName || !formData.lastName || !formData.address) {
@@ -30,7 +30,7 @@ export default function FarmerRegister() {
     }
 
     setError("");
-    setLoading(true); // Start loading
+    setLoading(true); 
 
     try {
       const pendingFarmer = {
@@ -40,18 +40,17 @@ export default function FarmerRegister() {
         kycCompleted: false,
       };
 
-      // Simulate API or processing delay
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       localStorage.setItem("pendingFarmer", JSON.stringify(pendingFarmer));
 
-      alert("Farmer registered successfully!"); // Success alert
-      navigate("/kyc"); // Redirect to KYC page
+      alert("Farmer registered successfully!"); 
+      navigate("/kyc"); 
     } catch (err) {
       console.error(err);
-      setError("Registration failed. Please try again."); // Show error
+      setError("Registration failed. Please try again."); 
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
@@ -110,7 +109,7 @@ export default function FarmerRegister() {
 
           <button
             type="submit"
-            disabled={loading} // disable button when loading
+            disabled={loading}
             className={`w-full py-3 rounded-xl font-semibold shadow-md transition-all ${
               loading
                 ? "bg-green-500 cursor-not-allowed text-gray-100"
@@ -122,5 +121,5 @@ export default function FarmerRegister() {
         </form>
       </div>
     </div>
-  );
+  )
 }
