@@ -1,3 +1,4 @@
+
 import { HeroSection } from "../components/HeroSection";
 import Features from "../components/Features";
 import { Badge } from "../components/Badge";
@@ -23,4 +24,5 @@ export default function Home() {
       <HowItWorks/>
     </div>
   );
+
 }
