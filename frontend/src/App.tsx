@@ -1,11 +1,24 @@
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
+import FarmerRegister from "./pages/farmers/Register";
+import InvestorBrowse from "./pages/investors/Browse";
+import "./App.css";
 
-import './App.css'
 
 function App() {
-
   return (
-   <h1 className='text-white'>Hello World</h1>
-  )
+    <div className=" p-4">
+      {/* Navbar shows on all pages */}
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/farmers/register" element={<FarmerRegister />} />
+        <Route path="/investors/browse" element={<InvestorBrowse />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
