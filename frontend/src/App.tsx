@@ -5,11 +5,9 @@ import FarmerRegister from "./pages/farmers/Register";
 import InvestorBrowse from "./pages/investors/Browse";
 import "./App.css";
 
-
 function App() {
   return (
-    <div className=" p-4">
-      {/* Navbar shows on all pages */}
+    <div className="p-4">
       <NavBar />
 
       <Routes>
