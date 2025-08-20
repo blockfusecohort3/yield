@@ -1,10 +1,14 @@
-import React from 'react';
-import { Leaf } from 'lucide-react';
+import React, { useState } from 'react';
+import { Leaf, ArrowRight, Lightbulb} from 'lucide-react';
+
 import { Badge } from './Badge';
 import { Button } from './Button';
 import { ImageCard } from './ImageCard';
 
+
 export const HeroSection: React.FC = () => {
+    const [swapped, setSwapped] = useState(false);
+
   const mainTags = [
     'Innovative Agriculture',
     'Sustainable Farming',
@@ -13,8 +17,9 @@ export const HeroSection: React.FC = () => {
     'Green Technology'
   ];
 
+
   return (
-    <section className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 py-12 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-gradient-to-b from green-50 via-green-100 to-green-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
@@ -26,12 +31,48 @@ export const HeroSection: React.FC = () => {
             
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Sustainable{' '}
-                <span className="inline-flex items-center gap-2">
+                Sustainable{' '} <br />
+               <div className='flex items-center gap-2'>
+                 <span className="inline-flex items-center gap-2">
                   farming
-                  <Leaf className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-green-600" />
+
                 </span>
-                {' '}solutions for a better tomorrow.
+     
+      <span className="flex items-center space-x-0 relative overflow-hidden">
+
+        <div className="relative w-14 h-14 rounded-full border-2 border-green-600 animate-slideLeft flex items-center justify-center">
+        </div>
+
+        {/* Leaf Icon */}
+        <div className="relative w-14 h-14 rounded-full bg-green-600 text-white animate-slideRight flex items-center justify-center">
+          <Leaf className="w-7 h-7" />
+        </div>
+      </span>
+
+      {/* Custom Animation Styles */}
+      <style >{`
+        @keyframes slideLeft {
+          0% { transform: translateX(0); background-color: transparent; }
+          50% { transform: translateX(3.5rem); background-color: #16a34a; } /* green-600 */
+          100% { transform: translateX(0); background-color: transparent; }
+        }
+
+        @keyframes slideRight {
+          0% { transform: translateX(0); background-color: #16a34a; }
+          50% { transform: translateX(-3.5rem); background-color: transparent; color: #16a34a; }
+          100% { transform: translateX(0); background-color: #16a34a; color: white; }
+        }
+
+        .animate-slideLeft {
+          animation: slideLeft 3s infinite ease-in-out;
+        }
+
+        .animate-slideRight {
+          animation: slideRight 3s infinite ease-in-out;
+        }
+      `}</style>
+               </div>
+                for a better tomorrow.
               </h1>
               
               <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl">
@@ -40,14 +81,46 @@ export const HeroSection: React.FC = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="primary">
-                Get Started Today
-              </Button>
-              <Button variant="secondary">
-                How It Works
-              </Button>
-            </div>
+           <div className="flex flex-col sm:flex-row gap-4">
+  {/* Get Started Today Button */}
+    <button className="relative overflow-hidden  bg-gradient-to-r from-green-700 via-green-600 to-emerald-500 text-white px-8 py-3 rounded-full transition-all duration-500 flex items-center justify-between space-x-3 group shadow-lg">
+      {/* Glow effect */}
+      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 via-emerald-400 to-green-300 opacity-50 blur-2xl group-hover:opacity-80 group-hover:blur-3xl transition-all duration-700"></span>
+      {/* Shine overlay */}
+      <span className="absolute -left-20 top-0 h-full w-20 bg-white/20 rotate-12 group-hover:left-[130%] transition-all duration-700 ease-in-out"></span>
+
+      <span className="relative z-10 font-semibold tracking-wide group-hover:tracking-wider transition-all duration-500">
+        Get Started Today
+      </span>
+
+      {/* Arrow in Circle */}
+      <div className="relative z-10 bg-white rounded-full p-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+        <ArrowRight
+          size={22}
+          className="text-green-600 group-hover:translate-x-1 transition-transform duration-500"
+        />
+      </div>
+    </button>
+
+  {/* How It Works Button */}
+  <a
+    href="#"
+    className="group flex items-center relative py-3 px-6 rounded-full bg-green-600/10 hover:bg-green-600/20 transition-all duration-500 ease-in-out shadow-md"
+  >
+    <div className="flex items-center">
+      <div className="bg-green-600 p-2 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
+        <Lightbulb
+          size={20}
+          className="text-white transition-all duration-500"
+        />
+      </div>
+      <span className="ml-3 font-medium text-green-800 group-hover:text-green-900 transition-colors duration-500">
+        How it works
+      </span>
+    </div>
+  </a>
+</div>
+
           </div>
 
           {/* Right Image Grid */}
