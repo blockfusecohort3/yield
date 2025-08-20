@@ -5,10 +5,10 @@ import FarmerRegister from "./pages/farmers/Register";
 import InvestorBrowse from "./pages/investors/Browse";
 import "./App.css";
 
-
 function App() {
   return (
-    <div className=" p-4 ">
+    <div className="p-4">
+
       <NavBar />
 
       <Routes>
