@@ -70,7 +70,7 @@ export default function FarmerRegister() {
         icon: <CheckCircle className="text-green-500" />,
       });
 
-      navigate("/FarmerKyc");
+      navigate("/farmers/farmerkyc");
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -81,7 +81,6 @@ export default function FarmerRegister() {
     }
   };
 
-  // Shake animation
   const shake = {
     initial: { x: 0 },
     animate: {
@@ -99,7 +98,7 @@ export default function FarmerRegister() {
   <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl md:max-w-3xl lg:max-w-4xl p-4 sm:p-6 md:p-8 max-h-screen overflow-auto">
 
             <Link
-                to="/investors/InvestorRegister"
+                to="/investors/register"
                 className="flex w-60 items-center group space-x-2 bg-white border border-green-400 text-green-700 px-5 py-1 rounded-full font-medium"
               >
                  <ArrowLeft
@@ -185,7 +184,7 @@ export default function FarmerRegister() {
              <button
   type="submit"
   disabled={loading}
-  className={`w-full py-3 rounded-xl font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
+  className={`w-full py-3 rounded-full cursor-pointer font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
     loading
       ? "bg-green-600 cursor-not-allowed text-gray-100"
       : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"

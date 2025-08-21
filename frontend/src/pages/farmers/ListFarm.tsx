@@ -203,7 +203,7 @@ export default function AddFarm() {
 
         <button
           type="submit"
-          className="bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800 transition-all shadow-md"
+          className="bg-green-700 text-white py-3 rounded-full font-semibold hover:bg-green-800 transition-all shadow-md"
         >
           Add Farm
         </button>

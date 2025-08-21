@@ -28,7 +28,6 @@ export default function InvestorRegister() {
 
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // clear field error on typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
@@ -78,7 +77,7 @@ export default function InvestorRegister() {
         icon: <CheckCircle className="text-green-600" />,
       });
 
-      navigate("/investors/browse");
+      navigate("/investors/investorkyc");
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -189,7 +188,7 @@ export default function InvestorRegister() {
          <button
   type="submit"
   disabled={loading}
-  className={`w-full py-3 rounded-xl font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
+  className={`w-full py-3 rounded-full cursor-pointer font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
     loading
       ? "bg-green-600 cursor-not-allowed text-gray-100"
       : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"

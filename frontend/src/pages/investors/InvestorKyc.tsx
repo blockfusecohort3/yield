@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { toast } from "sonner"; 
-import { CheckCircle, XCircle } from "lucide-react"; 
+import { toast } from "sonner";
+import { CheckCircle, XCircle } from "lucide-react";
 
-export default function FarmerKyc() {
+export default function InvestorKyc() {
   const [form, setForm] = useState({
     dob: "",
     nationalId: "",
@@ -16,18 +16,18 @@ export default function FarmerKyc() {
     nationalId: false,
     address: false,
   });
-  const [pendingFarmer, setPendingFarmer] = useState(null);
+  const [pendingInvestor, setPendingInvestor] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const farmer = JSON.parse(localStorage.getItem("pendingFarmer"));
-    if (!farmer) {
-      toast.error("No pending farmer found. Please register first.", {
+    const investor = JSON.parse(localStorage.getItem("pendingInvestor"));
+    if (!investor) {
+      toast.error("No pending investor found. Please register first.", {
         icon: <XCircle className="text-red-500" />,
       });
       navigate("/register");
     } else {
-      setPendingFarmer(farmer);
+      setPendingInvestor(investor);
     }
   }, [navigate]);
 
@@ -61,55 +61,53 @@ export default function FarmerKyc() {
       return;
     }
 
-    if (!pendingFarmer) return;
+    if (!pendingInvestor) return;
 
-    const completedFarmer = {
-      ...pendingFarmer,
+    const completedInvestor = {
+      ...pendingInvestor,
       ...form,
       kycCompleted: true,
-      role: "farmer",
     };
 
-    const existingFarmers = JSON.parse(localStorage.getItem("farmers")) || [];
+    const existingInvestors = JSON.parse(localStorage.getItem("investors")) || [];
     localStorage.setItem(
-      "farmers",
-      JSON.stringify([...existingFarmers, completedFarmer])
+      "investors",
+      JSON.stringify([...existingInvestors, completedInvestor])
     );
 
-    localStorage.removeItem("pendingFarmer");
+    localStorage.removeItem("pendingInvestor");
 
-    toast.success("KYC submitted successfully 🌾 Farmer verified!", {
+    toast.success("KYC submitted successfully 🎉 Investor verified!", {
       icon: <CheckCircle className="text-green-500" />,
     });
 
-    // Redirect to farmer dashboard
-    navigate("/farmer-dashboard");
+    navigate("/dashboard");
   };
 
   const shake = {
     initial: { x: 0 },
-    animate: {
-      x: [0, -6, 6, -6, 6, 0],
-      transition: { duration: 0.4 },
-    },
+    animate: { x: [0, -6, 6, -6, 6, 0], transition: { duration: 0.4 } },
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 p-6">
-      <div className="bg-white shadow-xl rounded-2xl w-full max-w-4xl p-8">
-        {/* Header */}
+      
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white shadow-xl rounded-2xl w-full max-w-4xl p-8 overflow-hidden"
+      >
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold text-green-800 flex items-center justify-center gap-2">
-            🌾 Farmer KYC Verification
+          <h1 className="text-3xl font-extrabold text-green-800">
+            Investor KYC 🔒
           </h1>
           <p className="text-gray-600 mt-2">
-            Please complete your KYC to access the Farmer Dashboard.
+            Please complete your KYC to activate your investment dashboard.
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* DOB */}
           <motion.div
             variants={shake}
             initial="initial"
@@ -131,7 +129,6 @@ export default function FarmerKyc() {
             />
           </motion.div>
 
-          {/* National ID */}
           <motion.div
             variants={shake}
             initial="initial"
@@ -153,7 +150,6 @@ export default function FarmerKyc() {
             />
           </motion.div>
 
-          {/* Address */}
           <motion.div
             variants={shake}
             initial="initial"
@@ -188,14 +184,15 @@ export default function FarmerKyc() {
           </div>
 
           {/* Submit */}
-          <button
+          <motion.button
             type="submit"
-            className="w-full bg-green-700 text-white py-3 rounded-full hover:bg-green-800 transition font-semibold"
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-green-700 text-white py-3 rounded-full hover:bg-green-800 transition font-semibold shadow-md"
           >
             Submit KYC
-          </button>
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
