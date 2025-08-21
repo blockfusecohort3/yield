@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import FarmerRegister from "./pages/farmers/Register";
-import InvestorRegister from "./pages/investors/InvestorRegister";
 import InvestorBrowse from "./pages/investors/Browse";
 import FarmerKyc from "./pages/farmers/FarmerKyc";
 import InvestorKyc from "./pages/investors/InvestorKyc";
@@ -13,13 +12,12 @@ import InvestorDashboard from "./pages/investors/InvestorDashboard";
 
 import "./App.css";
 
+
 function App() {
   return (
-    <div className="p-4">
-      {/* Navbar at the top */}
+    <div className=" p-4 ">
       <NavBar />
 
-      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/farmers/register" element={<FarmerRegister />} />
@@ -31,8 +29,6 @@ function App() {
         <Route path="/farmers/farmerDashboard" element={<FarmerDashboard />} />
         <Route path="/investors/investorDashboard" element={<InvestorDashboard />} />
       </Routes>
-
-      <Footer/>
     </div>
   );
 }
