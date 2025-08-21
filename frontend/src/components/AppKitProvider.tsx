@@ -1,37 +1,49 @@
-import React from "react";
-import { createAppKit } from "@reown/appkit/react";
-import { WagmiProvider } from "wagmi";
-import { sepolia } from "@reown/appkit/networks";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
+import { createAppKit } from '@reown/appkit/react'
+import { WagmiProvider } from 'wagmi'
+import { sepolia } from '@reown/appkit/networks'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 
-const queryClient = new QueryClient();
-const projectId = "9c8981e6010d83149a9d197f041f2229";
+// 0. Setup queryClient
+const queryClient = new QueryClient()
 
+const projectId = '9c8981e6010d83149a9d197f041f2229'
+
+// 2. App metadata
 const metadata = {
-  name: "Yield",
-  description: "A decentralized platform connecting investors and farmers",
-  url: "http://localhost:5173",
-  icons: ["https://avatars.githubusercontent.com/u/179229932"]
-};
+  name: 'Yield',
+  description: 'A decentralize platform that connects investors and farmers',
+  url: 'http://localhost:5173', // 👈 match your dev domain
+  icons: ['https://avatars.githubusercontent.com/u/179229932']
+}
 
-const networks = [sepolia];
-const wagmiAdapter = new WagmiAdapter({ networks, projectId, ssr: true });
+// 3. Use Sepolia for dev/test
+const networks = [sepolia]
 
+// 4. Wagmi Adapter
+const wagmiAdapter = new WagmiAdapter({
+  networks,
+  projectId,
+  ssr: true
+})
+
+// 5. Create modal
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
   projectId,
   metadata,
-  features: { analytics: true }
-});
+  features: {
+    analytics: true // Optional
+  }
+})
 
-export function AppKitProvider({ children }: { children: React.ReactNode }) {
+export function AppKitProvider({ children }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         {children}
       </QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }
