@@ -29,7 +29,7 @@ A blockchain-powered agro-finance platform that:
 ---
 
 ##  Current Features (Implemented)
--  **Farm-to-Farm Investment**: Farmers can buy shares from other farms.  
+ 
 -  **Farm Registration**: Farmers can register their farms with required details.  
 -  **Farm Listing**: Farmers can list their farms for investors to explore.  
 -  **Investor Dashboard**: Investors can view a list of available farms.  
@@ -52,7 +52,8 @@ A blockchain-powered agro-finance platform that:
 -  **Cooperative Farming Pools**: Group-based investments where multiple farmers pool resources to secure larger funding.  
 -  **AI-Powered Farm Risk Scoring**: Leverage data (weather, location, past performance) to assess farmer risk profiles for investors.  
 -  **Investor Analytics Dashboard**: Advanced analytics showing ROI, repayment history, and farm performance trends.  
--  **Marketplace for Agro-Services**: Farmers can access seeds, equipment leasing, and advisory services within the platform.  
+-  **Marketplace for Agro-Services**: Farmers can access seeds, equipment leasing, and advisory services within the platform. 
+-  **Farm-to-Farm Investment**: Farmers can buy shares from other farms.  
 
 ---
 
