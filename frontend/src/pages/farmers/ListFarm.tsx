@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function AddFarm() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -9,6 +11,17 @@ export default function AddFarm() {
   const [availableShares, setAvailableShares] = useState("");
   const [farmImage, setFarmImage] = useState(null);
   const [fileKey, setFileKey] = useState(Date.now());
+
+  const [errors, setErrors] = useState({});
+
+  // Framer Motion shake animation
+  const shake = {
+    initial: { x: 0 },
+    animate: {
+      x: [0, -6, 6, -6, 6, 0],
+      transition: { duration: 0.4 },
+    },
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -23,12 +36,23 @@ export default function AddFarm() {
     e.preventDefault();
 
     if (!currentUser) {
-      alert("You must be logged in!");
+      toast.error("You must be logged in!");
       return;
     }
 
-    if (!farmLocation || !farmImage || !farmSize || !valuePerShare || !totalShares || !availableShares) {
-      alert("Please provide all farm details.");
+    const newErrors = {
+      farmLocation: farmLocation.trim() === "",
+      farmSize: farmSize.trim() === "",
+      valuePerShare: valuePerShare.trim() === "",
+      totalShares: totalShares.trim() === "",
+      availableShares: availableShares.trim() === "",
+      farmImage: !farmImage,
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some((err) => err)) {
+      toast.error("Please provide all farm details before submitting.");
       return;
     }
 
@@ -36,7 +60,9 @@ export default function AddFarm() {
 
     const newFarm = {
       id: Date.now(),
-      farmerName: currentUser.fullName || `${currentUser.firstName} ${currentUser.lastName}`,
+      farmerName:
+        currentUser.fullName ||
+        `${currentUser.firstName} ${currentUser.lastName}`,
       farmLocation,
       farmSize,
       valuePerShare,
@@ -47,6 +73,7 @@ export default function AddFarm() {
 
     localStorage.setItem("farms", JSON.stringify([...farms, newFarm]));
 
+    // Reset
     setFarmLocation("");
     setFarmSize("");
     setValuePerShare("");
@@ -54,74 +81,116 @@ export default function AddFarm() {
     setAvailableShares("");
     setFarmImage(null);
     setFileKey(Date.now());
-    alert("Farm added successfully!");
+    setErrors({});
+
+    toast.success("Farm added successfully! 🌱");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 p-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-6"
+        className="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-6"
       >
         <h2 className="text-2xl font-bold text-green-800 text-center">
           Add a New Farm
         </h2>
-        <p className="text-gray-500 text-center">
-          Fill in your farm details below
-        </p>
+        <p className="text-gray-500 text-center">Fill in your farm details below</p>
 
-        <input
+        {/* Farm Location */}
+        <motion.input
           type="text"
           placeholder="Farm Location"
           value={farmLocation}
           onChange={(e) => setFarmLocation(e.target.value)}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.farmLocation ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.farmLocation
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
-        <input
+        {/* Farm Size */}
+        <motion.input
           type="text"
           placeholder="Farm Size (e.g., 2 acres)"
           value={farmSize}
           onChange={(e) => setFarmSize(e.target.value)}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.farmSize ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.farmSize
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
-        <input
+        {/* Value per Share */}
+        <motion.input
           type="number"
           placeholder="Value per Share (₦)"
           value={valuePerShare}
           onChange={(e) => setValuePerShare(e.target.value)}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.valuePerShare ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.valuePerShare
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
-        <input
+        {/* Total Shares */}
+        <motion.input
           type="number"
           placeholder="Total Shares"
           value={totalShares}
           onChange={(e) => setTotalShares(e.target.value)}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.totalShares ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.totalShares
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
-        <input
+        {/* Available Shares */}
+        <motion.input
           type="number"
           placeholder="Total Shares Available"
           value={availableShares}
           onChange={(e) => setAvailableShares(e.target.value)}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.availableShares ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.availableShares
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
-        <input
+        {/* Farm Image */}
+        <motion.input
           key={fileKey}
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          required
-          className="border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+          variants={shake}
+          initial="initial"
+          animate={errors.farmImage ? "animate" : "initial"}
+          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
+            errors.farmImage
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 focus:ring-green-400"
+          }`}
         />
 
         {farmImage && (

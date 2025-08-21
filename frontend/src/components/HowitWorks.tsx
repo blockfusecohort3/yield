@@ -13,9 +13,9 @@ const HowItWorks = () => {
 
   return (
     <section className="bg-gradient-to-b from-green-50 via-green-100 to-green-50 py-16">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-bold text-green-700 text-center mb-12">
+        <h2 className="text-2xl  md:text-3xl font-bold text-black text-center mb-12">
           HOW IT WORKS
         </h2>
 

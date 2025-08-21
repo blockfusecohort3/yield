@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { toast } from "sonner"; // ✅ using toast instead of alert
+import { CheckCircle, XCircle } from "lucide-react"; // ✅ icons
 
 export default function KYCVerification() {
   const [form, setForm] = useState({
@@ -8,16 +11,21 @@ export default function KYCVerification() {
     address: "",
     idDocument: null,
   });
+  const [errors, setErrors] = useState({
+    dob: false,
+    nationalId: false,
+    address: false,
+  });
   const [pendingFarmer, setPendingFarmer] = useState(null);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
- 
   useEffect(() => {
     const farmer = JSON.parse(localStorage.getItem("pendingFarmer"));
     if (!farmer) {
-      alert("No pending farmer found. Please register first.");
-      navigate("/register"); 
+      toast.error("No pending farmer found. Please register first.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+      navigate("/register");
     } else {
       setPendingFarmer(farmer);
     }
@@ -29,14 +37,28 @@ export default function KYCVerification() {
       ...prev,
       [name]: files ? files[0] : value,
     }));
-    if (error) setError(""); 
+
+    // clear error when user types
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: false }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.dob || !form.nationalId || !form.address) {
-      setError("Please fill in all required fields.");
+    const newErrors = {
+      dob: form.dob.trim() === "",
+      nationalId: form.nationalId.trim() === "",
+      address: form.address.trim() === "",
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some((err) => err)) {
+      toast.error("Please fill in all required fields.", {
+        icon: <XCircle className="text-red-500" />,
+      });
       return;
     }
 
@@ -48,18 +70,27 @@ export default function KYCVerification() {
       kycCompleted: true,
     };
 
-   
     const existingFarmers = JSON.parse(localStorage.getItem("farmers")) || [];
     localStorage.setItem(
       "farmers",
       JSON.stringify([...existingFarmers, completedFarmer])
     );
 
-   
     localStorage.removeItem("pendingFarmer");
 
-    alert("✅ KYC submitted successfully and farmer verified!");
-    navigate("/dashboard"); // redirect to dashboard
+    toast.success("KYC submitted successfully 🎉 Farmer verified!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
+    navigate("/dashboard");
+  };
+
+  // Shake animation
+  const shake = {
+    initial: { x: 0 },
+    animate: {
+      x: [0, -6, 6, -6, 6, 0],
+      transition: { duration: 0.4 },
+    },
   };
 
   return (
@@ -75,16 +106,14 @@ export default function KYCVerification() {
           </p>
         </div>
 
-        {/* Error Message */}
-        {error && (
-          <div className="mb-4 text-red-600 bg-red-100 border border-red-300 rounded-lg p-3 text-center">
-            {error}
-          </div>
-        )}
-
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
+          {/* DOB */}
+          <motion.div
+            variants={shake}
+            initial="initial"
+            animate={errors.dob ? "animate" : "initial"}
+          >
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Date of Birth
             </label>
@@ -93,11 +122,20 @@ export default function KYCVerification() {
               name="dob"
               value={form.dob}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+                errors.dob
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-green-500"
+              }`}
             />
-          </div>
+          </motion.div>
 
-          <div>
+          {/* National ID */}
+          <motion.div
+            variants={shake}
+            initial="initial"
+            animate={errors.nationalId ? "animate" : "initial"}
+          >
             <label className="block text-sm font-medium text-gray-700 mb-1">
               National ID / BVN / Passport No.
             </label>
@@ -106,11 +144,20 @@ export default function KYCVerification() {
               name="nationalId"
               value={form.nationalId}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+                errors.nationalId
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-green-500"
+              }`}
             />
-          </div>
+          </motion.div>
 
-          <div>
+          {/* Address */}
+          <motion.div
+            variants={shake}
+            initial="initial"
+            animate={errors.address ? "animate" : "initial"}
+          >
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Residential Address
             </label>
@@ -118,10 +165,15 @@ export default function KYCVerification() {
               name="address"
               value={form.address}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+                errors.address
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-green-500"
+              }`}
             />
-          </div>
+          </motion.div>
 
+          {/* Optional Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload ID Document (optional)
@@ -134,6 +186,7 @@ export default function KYCVerification() {
             />
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800 transition font-semibold"
