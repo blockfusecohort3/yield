@@ -1,20 +1,21 @@
+// src/components/RoleSelectionModal.tsx
 import React, { useState, useEffect } from 'react';
 import { Wallet, Leaf, X, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface RoleSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onRoleSelect: (role: 'investor' | 'farmer') => void;
 }
 
 const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
   isOpen,
-  onClose,
-  onRoleSelect
+  onClose
 }) => {
   const [selectedRole, setSelectedRole] = useState<'investor' | 'farmer' | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) setIsVisible(true);
@@ -32,7 +33,11 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
     // animate button arrow
     setIsClicked(true);
     setTimeout(() => {
-      onRoleSelect(selectedRole);
+      if (selectedRole === 'investor') {
+        navigate('/investors/investorRegister');
+      } else if (selectedRole === 'farmer') {
+        navigate('/farmers/register');
+      }
       setIsClicked(false);
       handleClose();
     }, 500);
@@ -89,9 +94,13 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
               }`}
             >
               <div className="flex flex-col items-center text-center">
-                <div className={`p-4 rounded-full mb-4 ${
-                  selectedRole === 'investor' ? 'bg-green-500 text-white' : 'bg-green-50 text-green-700'
-                }`}>
+                <div
+                  className={`p-4 rounded-full mb-4 ${
+                    selectedRole === 'investor'
+                      ? 'bg-green-500 text-white'
+                      : 'bg-green-50 text-green-700'
+                  }`}
+                >
                   <Wallet className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-semibold mb-1 text-gray-900">
@@ -118,9 +127,13 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
               }`}
             >
               <div className="flex flex-col items-center text-center">
-                <div className={`p-4 rounded-full mb-4 ${
-                  selectedRole === 'farmer' ? 'bg-green-500 text-white' : 'bg-green-50 text-green-700'
-                }`}>
+                <div
+                  className={`p-4 rounded-full mb-4 ${
+                    selectedRole === 'farmer'
+                      ? 'bg-green-500 text-white'
+                      : 'bg-green-50 text-green-700'
+                  }`}
+                >
                   <Leaf className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-semibold mb-1 text-gray-900">
@@ -150,14 +163,18 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
           >
             <span
               className={`inline-block transition-all duration-300 ${
-                isClicked ? 'translate-x-8 opacity-0' : 'translate-x-0 opacity-100'
+                isClicked
+                  ? 'translate-x-8 opacity-0'
+                  : 'translate-x-0 opacity-100'
               }`}
             >
               Continue
             </span>
             <ArrowRight
               className={`absolute right-4 top-1/2 -translate-y-1/2 text-white transition-all duration-300 ${
-                isClicked ? 'translate-x-6 opacity-100' : '-translate-x-4 opacity-0'
+                isClicked
+                  ? 'translate-x-6 opacity-100'
+                  : '-translate-x-4 opacity-0'
               }`}
               size={20}
             />

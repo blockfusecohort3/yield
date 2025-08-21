@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Wallet, Wrench, Leaf, BookOpen, Search } from "lucide-react";
+import { Menu, X, Wallet, Home, Leaf, BookOpen, Search } from "lucide-react";
 import WalletWithRole from "./WalletWithRole";
 
 export default function NavBar() {
@@ -19,10 +19,10 @@ export default function NavBar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-green-800 font-medium">
           {/** Services */}
-          <a href="#" className="group flex items-center relative transition-all duration-300 ease-in-out">
+          <a href="/" className="group flex items-center relative transition-all duration-300 ease-in-out">
             <div className="flex items-center overflow-hidden bg-green-600/20 group-hover:bg-green-600/30 rounded-full px-3 py-3 transition-all duration-500 ease-in-out group-hover:pr-20">
-              <Wrench size={20} className="text-green-800 transition-all duration-500" />
-              <span className="ml-2 whitespace-nowrap text-green-800 transition-all duration-500">Services</span>
+              <Home size={20} className="text-green-800 transition-all duration-500" />
+              <span className="ml-2 whitespace-nowrap text-green-800 transition-all duration-500">Home</span>
             </div>
           </a>
 
