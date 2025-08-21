@@ -25,7 +25,7 @@ export default function FarmerKyc() {
       toast.error("No pending farmer found. Please register first.", {
         icon: <XCircle className="text-red-500" />,
       });
-      navigate("/farmer-register"); 
+      navigate("/farmers/register");
     } else {
       setPendingFarmer(farmer);
     }
@@ -83,8 +83,7 @@ export default function FarmerKyc() {
     });
 
     // Redirect to farmer dashboard
-    navigate("/farmer-dashboard");
-
+    navigate("/farmers/farmerDashboard");
   };
 
   const shake = {

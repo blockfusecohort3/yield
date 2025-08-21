@@ -7,8 +7,10 @@ import InvestorBrowse from "./pages/investors/Browse";
 import FarmerKyc from "./pages/farmers/FarmerKyc";
 import InvestorKyc from "./pages/investors/InvestorKyc";
 import Footer from "./components/Footer";
+import FarmerDashboard from "./pages/farmers/FarmerDashboard";
+import InvestorDashboard from "./pages/investors/InvestorDashboard";
 
-import ListFarm from "./pages/farmers/ListFarm";
+
 import "./App.css";
 
 function App() {
@@ -23,10 +25,11 @@ function App() {
         <Route path="/farmers/register" element={<FarmerRegister />} />
         <Route path="/investors/register" element={<InvestorRegister />} />
         <Route path="/browse" element={<InvestorBrowse />} />
-        <Route path="/listfarm" element={<ListFarm />} />
+        {/* <Route path="/farmers/AddFarm" element={<AddFarm />} /> */}
         <Route path="/farmers/farmerkyc" element={<FarmerKyc />} />
         <Route path="/investors/investorkyc" element={<InvestorKyc />} />
-
+        <Route path="/farmers/farmerDashboard" element={<FarmerDashboard />} />
+        <Route path="/investors/investorDashboard" element={<InvestorDashboard />} />
       </Routes>
 
       <Footer/>
