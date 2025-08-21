@@ -39,7 +39,7 @@ A blockchain-powered agro-finance platform that:
 ---
 
 ## Ongoing Development
-- 🛡 **Insurance Integration**: Farmers can opt-in for insurance with whitelisted providers to build credibility and protect against risks.
+-  **Insurance Integration**: Farmers can opt-in for insurance with whitelisted providers to build credibility and protect against risks.
 
 ---
 
