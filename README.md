@@ -86,8 +86,6 @@ A blockchain-powered agro-finance platform that:
 ## Tech Stack
 - **Smart Contracts** – Solidity, Hardhat  
 - **Frontend** – React.js, RainbowKit/Wagmi  
-- **Backend** – Node.js, NestJS  
-- **Database** – MongoDB  
 - **Blockchain** – Ethereum/Polygon  
 
 ---
