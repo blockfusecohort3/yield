@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, MapPin, CheckCircle, XCircle,ArrowLeft } from "lucide-react";
+import { User, MapPin, CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast, Toaster } from "sonner";
@@ -70,7 +70,8 @@ export default function FarmerRegister() {
         icon: <CheckCircle className="text-green-500" />,
       });
 
-      navigate("/FarmerKyc");
+      navigate("/farmers/farmerkyc");
+
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -81,7 +82,7 @@ export default function FarmerRegister() {
     }
   };
 
-  // Shake animation
+
   const shake = {
     initial: { x: 0 },
     animate: {
@@ -92,14 +93,14 @@ export default function FarmerRegister() {
 
   return (
     <>
-      {/* Toast Provider */}
+     
       <Toaster richColors position="top-center" closeButton />
 
      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
   <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl md:max-w-3xl lg:max-w-4xl p-4 sm:p-6 md:p-8 max-h-screen overflow-auto">
 
             <Link
-                to="/investors/InvestorRegister"
+                to="/investors/register"
                 className="flex w-60 items-center group space-x-2 bg-white border border-green-400 text-green-700 px-5 py-1 rounded-full font-medium"
               >
                  <ArrowLeft
@@ -108,6 +109,7 @@ export default function FarmerRegister() {
       />
                 <span>Investor Registery</span>
               </Link>
+
           <h1 className="text-2xl py-4 font-bold text-green-800 text-left lg:text-center">
             Register as a Farmer
           </h1>
@@ -116,7 +118,7 @@ export default function FarmerRegister() {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-            {/* First Name */}
+            
             <motion.div
               variants={shake}
               initial="initial"
@@ -138,7 +140,7 @@ export default function FarmerRegister() {
               />
             </motion.div>
 
-            {/* Last Name */}
+        
             <motion.div
               variants={shake}
               initial="initial"
@@ -160,7 +162,7 @@ export default function FarmerRegister() {
               />
             </motion.div>
 
-            {/* Address */}
+          
             <motion.div
               variants={shake}
               initial="initial"
@@ -185,7 +187,7 @@ export default function FarmerRegister() {
              <button
   type="submit"
   disabled={loading}
-  className={`w-full py-3 rounded-xl font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
+  className={`w-full py-3 rounded-full cursor-pointer font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
     loading
       ? "bg-green-600 cursor-not-allowed text-gray-100"
       : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"
@@ -219,6 +221,7 @@ export default function FarmerRegister() {
     "Register Farmer"
   )}
 </button>
+
           </form>
         </div>
       </div>

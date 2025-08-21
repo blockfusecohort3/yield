@@ -3,15 +3,13 @@ import { Sprout, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-16">
+    <footer className="bg-gradient from-green-50 via-green-100 to-green-50 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-green-600 p-2 rounded-lg">
-                <Sprout className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold">Yield</span>
+               <img width={40} src="/src/assets/images/yield_logo.png" alt="Yield Logo" />
+          <span className="text-2xl font-bold text-green-800">Yield</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
               Empowering farmers with smart finance through decentralized lending 
@@ -19,20 +17,12 @@ const Footer = () => {
             </p>
           </div>
           
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Solutions</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li><a href="#" className="hover:text-green-400 transition-colors">DeFi Lending</a></li>
-              <li><a href="#" className="hover:text-green-400 transition-colors">Green Finance</a></li>
-              <li><a href="#" className="hover:text-green-400 transition-colors">Smart Farming</a></li>
-              <li><a href="#" className="hover:text-green-400 transition-colors">Resource Management</a></li>
-            </ul>
-          </div>
+        
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold text-black mb-4">Company</h3>
             <ul className="space-y-3 text-gray-400">
-              <li><a href="#" className="hover:text-green-400 transition-colors">About Us</a></li>
+              <li><a href="/" className="hover:text-green-400 transition-colors">Home</a></li>
               <li><a href="#" className="hover:text-green-400 transition-colors">Careers</a></li>
               <li><a href="#" className="hover:text-green-400 transition-colors">Press</a></li>
               <li><a href="#" className="hover:text-green-400 transition-colors">Blog</a></li>
@@ -40,11 +30,12 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg text-black font-semibold mb-4">Contact</h3>
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5" />
-                <span>hello@yield.finance</span>
+                <span>blockfusecohort3@gmail.com
+</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5" />
@@ -52,7 +43,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5" />
-                <span>San Francisco, CA</span>
+                <span>Nigeria, Jos Plateau state</span>
               </div>
             </div>
           </div>

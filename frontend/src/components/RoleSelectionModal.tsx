@@ -1,7 +1,7 @@
 // src/components/RoleSelectionModal.tsx
-import React, { useState, useEffect } from 'react';
-import { Wallet, Leaf, X, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Wallet, Leaf, X, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface RoleSelectionModalProps {
   isOpen: boolean;
@@ -10,9 +10,11 @@ interface RoleSelectionModalProps {
 
 const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
   isOpen,
-  onClose
+  onClose,
 }) => {
-  const [selectedRole, setSelectedRole] = useState<'investor' | 'farmer' | null>(null);
+  const [selectedRole, setSelectedRole] = useState<
+    "investor" | "farmer" | null
+  >(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
@@ -33,36 +35,37 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
     // animate button arrow
     setIsClicked(true);
     setTimeout(() => {
-      if (selectedRole === 'investor') {
-        navigate('/investors/investorRegister');
-      } else if (selectedRole === 'farmer') {
-        navigate('/farmers/register');
+      if (selectedRole === "investor") {
+        navigate("/investors/register");
+      } else if (selectedRole === "farmer") {
+        navigate("/farmers/register");
       }
       setIsClicked(false);
       handleClose();
-    }, 500);
+    }, 600);
   };
 
-  const handleRoleSelect = (role: 'investor' | 'farmer') => setSelectedRole(role);
+  const handleRoleSelect = (role: "investor" | "farmer") =>
+    setSelectedRole(role);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center  justify-center">
       {/* Backdrop */}
-      <div
-        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
-          isVisible ? 'opacity-50' : 'opacity-0'
-        }`}
-        onClick={handleClose}
-      />
-
+     <div
+  className={`absolute inset-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${
+    isVisible ? "opacity-100" : "opacity-0"
+  }`}
+  onClick={handleClose}
+/>
       {/* Modal */}
-      <div
-        className={`relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full mx-4 transform transition-all duration-300 ${
-          isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-        }`}
-      >
+   <div className=" relative top-52 flex items-center justify-center  p-6">
+  <div
+    className={`bg-white rounded-3xl shadow-2xl max-w-4xl w-full mx-4 transform transition-all duration-300 ${
+      isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+    }`}
+  >
         {/* Close button */}
         <button
           onClick={handleClose}
@@ -72,7 +75,6 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
         </button>
 
         <div className="p-8">
-          {/* Header */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-2 text-gray-900">
               Choose Your Role
@@ -86,19 +88,19 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Investor */}
             <button
-              onClick={() => handleRoleSelect('investor')}
+              onClick={() => handleRoleSelect("investor")}
               className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                selectedRole === 'investor'
-                  ? 'bg-green-100 border-green-500 shadow-lg'
-                  : 'bg-white border-gray-200 hover:border-green-300 hover:shadow-md'
+                selectedRole === "investor"
+                  ? "bg-green-100 border-green-500 shadow-lg"
+                  : "bg-white border-gray-200 hover:border-green-300 hover:shadow-md"
               }`}
             >
               <div className="flex flex-col items-center text-center">
                 <div
                   className={`p-4 rounded-full mb-4 ${
-                    selectedRole === 'investor'
-                      ? 'bg-green-500 text-white'
-                      : 'bg-green-50 text-green-700'
+                    selectedRole === "investor"
+                      ? "bg-green-500 text-white"
+                      : "bg-green-50 text-green-700"
                   }`}
                 >
                   <Wallet className="w-8 h-8" />
@@ -110,7 +112,7 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
                   Invest in sustainable farming projects
                 </p>
               </div>
-              {selectedRole === 'investor' && (
+              {selectedRole === "investor" && (
                 <div className="absolute top-3 right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center animate-pulse">
                   <div className="w-2 h-2 bg-white rounded-full"></div>
                 </div>
@@ -119,19 +121,19 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
 
             {/* Farmer */}
             <button
-              onClick={() => handleRoleSelect('farmer')}
+              onClick={() => handleRoleSelect("farmer")}
               className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                selectedRole === 'farmer'
-                  ? 'bg-green-100 border-green-500 shadow-lg'
-                  : 'bg-white border-gray-200 hover:border-green-300 hover:shadow-md'
+                selectedRole === "farmer"
+                  ? "bg-green-100 border-green-500 shadow-lg"
+                  : "bg-white border-gray-200 hover:border-green-300 hover:shadow-md"
               }`}
             >
               <div className="flex flex-col items-center text-center">
                 <div
                   className={`p-4 rounded-full mb-4 ${
-                    selectedRole === 'farmer'
-                      ? 'bg-green-500 text-white'
-                      : 'bg-green-50 text-green-700'
+                    selectedRole === "farmer"
+                      ? "bg-green-600 text-white"
+                      : "bg-green-50 text-green-700"
                   }`}
                 >
                   <Leaf className="w-8 h-8" />
@@ -143,7 +145,7 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
                   Access funding and resources to grow your farm
                 </p>
               </div>
-              {selectedRole === 'farmer' && (
+              {selectedRole === "farmer" && (
                 <div className="absolute top-3 right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center animate-pulse">
                   <div className="w-2 h-2 bg-white rounded-full"></div>
                 </div>
@@ -155,32 +157,36 @@ const RoleSelectionModal: React.FC<RoleSelectionModalProps> = ({
           <button
             onClick={handleContinue}
             disabled={!selectedRole || isClicked}
-            className={`mt-8 w-full py-4 rounded-2xl font-semibold text-lg relative overflow-hidden transition-all duration-300 ${
-              selectedRole
-                ? 'bg-green-600 text-white shadow hover:shadow-lg hover:scale-[1.02]'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-            }`}
+            className={`mt-8 w-full py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 relative 
+              transition-all duration-500 overflow-hidden
+              ${
+                selectedRole
+                  ? "bg-green-600 text-white shadow hover:shadow-lg"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              }`}
           >
+            {/* Continue text */}
             <span
-              className={`inline-block transition-all duration-300 ${
+              className={`transition-all duration-500 ${
                 isClicked
-                  ? 'translate-x-8 opacity-0'
-                  : 'translate-x-0 opacity-100'
+                  ? "opacity-0 translate-x-6"
+                  : "opacity-100 translate-x-0"
               }`}
             >
               Continue
             </span>
+
+            {/* Arrow */}
             <ArrowRight
-              className={`absolute right-4 top-1/2 -translate-y-1/2 text-white transition-all duration-300 ${
-                isClicked
-                  ? 'translate-x-6 opacity-100'
-                  : '-translate-x-4 opacity-0'
+              className={`transition-transform duration-500 ${
+                isClicked ? "translate-x-8" : "translate-x-0"
               }`}
-              size={20}
+              size={22}
             />
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

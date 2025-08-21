@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { toast } from "sonner"; // ✅ using toast instead of alert
-import { CheckCircle, XCircle } from "lucide-react"; // ✅ icons
+import { toast } from "sonner"; 
+import { CheckCircle, XCircle } from "lucide-react"; 
 
-export default function KYCVerification() {
+export default function FarmerKyc() {
   const [form, setForm] = useState({
     dob: "",
     nationalId: "",
@@ -25,7 +25,7 @@ export default function KYCVerification() {
       toast.error("No pending farmer found. Please register first.", {
         icon: <XCircle className="text-red-500" />,
       });
-      navigate("/register");
+      navigate("/farmers/register");
     } else {
       setPendingFarmer(farmer);
     }
@@ -38,7 +38,6 @@ export default function KYCVerification() {
       [name]: files ? files[0] : value,
     }));
 
-    // clear error when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
@@ -68,6 +67,7 @@ export default function KYCVerification() {
       ...pendingFarmer,
       ...form,
       kycCompleted: true,
+      role: "farmer",
     };
 
     const existingFarmers = JSON.parse(localStorage.getItem("farmers")) || [];
@@ -78,13 +78,14 @@ export default function KYCVerification() {
 
     localStorage.removeItem("pendingFarmer");
 
-    toast.success("KYC submitted successfully 🎉 Farmer verified!", {
+    toast.success("KYC submitted successfully 🌾 Farmer verified!", {
       icon: <CheckCircle className="text-green-500" />,
     });
-    navigate("/dashboard");
+
+    // Redirect to farmer dashboard
+    navigate("/farmers/farmerDashboard");
   };
 
-  // Shake animation
   const shake = {
     initial: { x: 0 },
     animate: {
@@ -94,19 +95,19 @@ export default function KYCVerification() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
-      <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 p-6">
+      <div className="bg-white shadow-xl rounded-2xl w-full max-w-4xl p-8">
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold text-green-800">
-            KYC Verification 🔒
+          <h1 className="text-3xl font-extrabold text-green-800 flex items-center justify-center gap-2">
+            🌾 Farmer KYC Verification
+
           </h1>
           <p className="text-gray-600 mt-2">
-            Please complete your KYC to get verified on the platform.
+            Please complete your KYC to access the Farmer Dashboard.
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* DOB */}
           <motion.div
@@ -122,7 +123,7 @@ export default function KYCVerification() {
               name="dob"
               value={form.dob}
               onChange={handleChange}
-              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+              className={`w-full p-3 border rounded-lg outline-none focus:ring ${
                 errors.dob
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-green-500"
@@ -144,7 +145,7 @@ export default function KYCVerification() {
               name="nationalId"
               value={form.nationalId}
               onChange={handleChange}
-              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+              className={`w-full p-3 border rounded-lg outline-none focus:ring ${
                 errors.nationalId
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-green-500"
@@ -165,7 +166,7 @@ export default function KYCVerification() {
               name="address"
               value={form.address}
               onChange={handleChange}
-              className={`w-full p-3 border rounded-lg outline-none focus:ring-2 ${
+              className={`w-full p-3 border rounded-lg outline-none focus:ring ${
                 errors.address
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-green-500"
@@ -173,7 +174,6 @@ export default function KYCVerification() {
             />
           </motion.div>
 
-          {/* Optional Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload ID Document (optional)
@@ -186,10 +186,9 @@ export default function KYCVerification() {
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800 transition font-semibold"
+            className="w-full bg-green-700 text-white py-3 rounded-full hover:bg-green-800 transition font-semibold"
           >
             Submit KYC
           </button>

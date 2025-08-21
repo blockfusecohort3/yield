@@ -96,10 +96,10 @@ export default function NavBar() {
       {isOpen && (
         <div className="md:hidden bg-white shadow-md p-4 space-y-4 rounded-xl">
           {/** Services */}
-          <a href="#" className="group flex items-center w-full">
-            <div className="flex items-center overflow-hidden bg-green-600/20 group-hover:bg-green-600/30 rounded-full px-3 py-3 transition-all duration-500 ease-in-out w-full">
-              <Wrench size={18} className="text-green-800 transition-all duration-500" />
-              <span className="ml-2 whitespace-nowrap text-green-800 transition-all duration-500">Services</span>
+          <a href="/" className="group flex items-center w-full">
+            <div className="flex items-center overflow-hidden bg-green-600/20 group-hover:bg-green-600/30 rounded-full px-3 py-3 transition-all duration-500 ease-in-out ">
+              <Home size={20} className="text-green-800 transition-all duration-500" />
+              <span className="ml-2 whitespace-nowrap text-green-800 transition-all duration-500">Home</span>
             </div>
           </a>
 

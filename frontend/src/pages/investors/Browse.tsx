@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
-import { MapPin, User, Star, Sprout, Wallet, PieChart, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  MapPin,
+  User,
+  Star,
+  Sprout,
+  Wallet,
+  PieChart,
+  CheckCircle,
+} from "lucide-react";
 import { toast } from "sonner";
 
 export default function FarmsList() {
   const [farms, setFarms] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const loadFarms = () => {
     const storedFarms = JSON.parse(localStorage.getItem("farms")) || [];
@@ -24,18 +34,17 @@ export default function FarmsList() {
 
   const handleInvest = (farm) => {
     toast.success(`You have shown interest in investing in ${farm.farmLocation}! 🌱`);
+    // ✅ Route to investment page
+    navigate(`/invest/${farm.id}`);
   };
 
   const filteredFarms = farms.filter((farm) => {
     const search = searchTerm.toLowerCase();
-    const locationMatch = farm.farmLocation.toLowerCase().includes(search);
-    const sizeMatch = farm.farmSize && farm.farmSize.toLowerCase().includes(search);
-    const valuePerShareMatch =
-      farm.valuePerShare && farm.valuePerShare.toString().includes(search);
-    const totalSharesMatch =
-      farm.totalShares && farm.totalShares.toString().includes(search);
-    const availableSharesMatch =
-      farm.availableShares && farm.availableShares.toString().includes(search);
+    const locationMatch = farm.farmLocation?.toLowerCase().includes(search);
+    const sizeMatch = farm.farmSize?.toLowerCase().includes(search);
+    const valuePerShareMatch = farm.valuePerShare?.toString().includes(search);
+    const totalSharesMatch = farm.totalShares?.toString().includes(search);
+    const availableSharesMatch = farm.availableShares?.toString().includes(search);
 
     return (
       locationMatch ||
@@ -49,9 +58,15 @@ export default function FarmsList() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-green-800 text-center mb-6">
-          🌾 Listed Farms
-        </h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-green-800">🌾 Listed Farms</h1>
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="px-4 py-2 text-sm rounded-lg bg-gray-200 hover:bg-gray-300"
+          >
+            ← Back
+          </button>
+        </div>
 
         {/* Search Bar */}
         <div className="mb-6 text-center">
@@ -67,7 +82,13 @@ export default function FarmsList() {
         {/* Empty State */}
         {filteredFarms.length === 0 ? (
           <p className="text-center text-gray-600 bg-white p-6 rounded-xl shadow-md">
-            No farms found.
+            No farms found.{" "}
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="text-green-600 font-semibold hover:underline ml-1"
+            >
+              Go back
+            </button>
           </p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -127,7 +148,7 @@ export default function FarmsList() {
                   </div>
                   <button
                     onClick={() => handleInvest(farm)}
-                    className="bg-green-600 text-white text-sm px-3 py-1 rounded-xl hover:bg-green-700 transition"
+                    className="bg-green-600 text-white text-sm px-3 py-1 rounded-full hover:bg-green-700 transition"
                   >
                     Invest
                   </button>

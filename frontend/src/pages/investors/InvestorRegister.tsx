@@ -4,10 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
-
-
 export default function InvestorRegister() {
-  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -25,10 +22,8 @@ export default function InvestorRegister() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // clear field error on typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
@@ -70,7 +65,7 @@ export default function InvestorRegister() {
         verified: false,
       };
 
-      await new Promise((r) => setTimeout(r, 1200)); // fake latency
+      await new Promise((r) => setTimeout(r, 1200));
 
       localStorage.setItem("pendingInvestor", JSON.stringify(pendingInvestor));
 
@@ -78,7 +73,8 @@ export default function InvestorRegister() {
         icon: <CheckCircle className="text-green-600" />,
       });
 
-      navigate("/investors/browse");
+      navigate("/investors/investorkyc");
+
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -89,7 +85,6 @@ export default function InvestorRegister() {
     }
   };
 
-  // shake animation for invalid fields
   const shake = {
     initial: { x: 0 },
     animate: {
@@ -99,19 +94,18 @@ export default function InvestorRegister() {
   };
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
-  <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl md:max-w-3xl lg:max-w-4xl p-4 sm:p-6 md:p-8 max-h-screen overflow-auto">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
+      <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl md:max-w-3xl lg:max-w-4xl p-4 sm:p-6 md:p-8 max-h-screen overflow-auto">
 
+        {/* 🔙 Fixed back button */}
         <Link
-                      to="/farmers/register"
-                      className="flex w-60 items-center group space-x-2 bg-white border border-green-400 text-green-700 px-5 py-1 rounded-full font-medium"
-                    >
-                       <ArrowLeft
-              className="transition-transform group-hover:-translate-x-3 duration-500 "
-               
-            />
-                      <span>Farmer Registery</span>
-                    </Link>
+          to="/farmers-register"
+          className="flex w-60 items-center group space-x-2 bg-white border border-green-400 text-green-700 px-5 py-1 rounded-full font-medium"
+        >
+          <ArrowLeft className="transition-transform group-hover:-translate-x-3 duration-500" />
+          <span>Farmer Registry</span>
+        </Link>
+
         <h1 className="text-2xl py-4 font-bold text-green-800 text-left lg:text-center">
           Register as an Investor
         </h1>
@@ -189,7 +183,7 @@ export default function InvestorRegister() {
          <button
   type="submit"
   disabled={loading}
-  className={`w-full py-3 rounded-xl font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
+  className={`w-full py-3 rounded-full cursor-pointer font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
     loading
       ? "bg-green-600 cursor-not-allowed text-gray-100"
       : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"
@@ -223,6 +217,7 @@ export default function InvestorRegister() {
     "Register Investor"
   )}
 </button>
+
 
         </form>
       </div>
