@@ -58,7 +58,7 @@ A blockchain-powered agro-finance platform that:
 
 ## Roadmap
 **MVP → Scale**
--  Farmer registration + KYC upload  
+ 
 -  Investor dashboard to browse farms  
 -  Smart contract escrow for milestone-based funding  
 -  Basic ratings & verification badges  
