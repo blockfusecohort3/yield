@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { toast } from "sonner"; // ✅ using toast instead of alert
-import { CheckCircle, XCircle } from "lucide-react"; // ✅ icons
+import { toast } from "sonner"; 
+import { CheckCircle, XCircle } from "lucide-react"; 
 
 export default function KYCVerification() {
   const [form, setForm] = useState({
@@ -25,7 +25,7 @@ export default function KYCVerification() {
       toast.error("No pending farmer found. Please register first.", {
         icon: <XCircle className="text-red-500" />,
       });
-      navigate("/register");
+      navigate("/farmer-register"); 
     } else {
       setPendingFarmer(farmer);
     }
@@ -38,7 +38,6 @@ export default function KYCVerification() {
       [name]: files ? files[0] : value,
     }));
 
-    // clear error when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
@@ -78,13 +77,13 @@ export default function KYCVerification() {
 
     localStorage.removeItem("pendingFarmer");
 
-    toast.success("KYC submitted successfully 🎉 Farmer verified!", {
+    toast.success("KYC submitted successfully  Farmer verified!", {
       icon: <CheckCircle className="text-green-500" />,
     });
-    navigate("/dashboard");
+
+    navigate("/farmer-register"); 
   };
 
-  // Shake animation
   const shake = {
     initial: { x: 0 },
     animate: {
@@ -96,17 +95,15 @@ export default function KYCVerification() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
       <div className="bg-white shadow-xl rounded-2xl w-full max-w-2xl p-8">
-        {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-extrabold text-green-800">
-            KYC Verification 🔒
+            KYC Verification 
           </h1>
           <p className="text-gray-600 mt-2">
             Please complete your KYC to get verified on the platform.
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* DOB */}
           <motion.div
@@ -173,7 +170,6 @@ export default function KYCVerification() {
             />
           </motion.div>
 
-          {/* Optional Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload ID Document (optional)
@@ -186,7 +182,6 @@ export default function KYCVerification() {
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800 transition font-semibold"

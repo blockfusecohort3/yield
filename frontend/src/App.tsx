@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import FarmerRegister from "./pages/farmers/Register";
 import InvestorRegister from "./pages/investors/InvestorRegister";
 import InvestorBrowse from "./pages/investors/Browse";
+import FarmerKyc from "./pages/farmers/FarmerKyc";
+import ListFarm from "./pages/farmers/ListFarm";
 import "./App.css";
 
 function App() {
@@ -15,9 +17,11 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/farmers/register" element={<FarmerRegister />} />
-        <Route path="/investors/InvestorRegister" element={<InvestorRegister />} />
-        <Route path="/investors/browse" element={<InvestorBrowse />} />
+        <Route path="/farmer-register" element={<FarmerRegister />} />
+        <Route path="/investor-register" element={<InvestorRegister />} />
+        <Route path="/browse" element={<InvestorBrowse />} />
+        <Route path="/list-farm" element={<ListFarm />} />
+        <Route path="/farmer-kyc" element={<FarmerKyc />} />
       </Routes>
     </div>
   );
