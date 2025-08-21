@@ -5,6 +5,9 @@ import FarmerRegister from "./pages/farmers/Register";
 import InvestorRegister from "./pages/investors/InvestorRegister";
 import InvestorBrowse from "./pages/investors/Browse";
 import FarmerKyc from "./pages/farmers/FarmerKyc";
+import InvestorKyc from "./pages/investors/InvestorKyc";
+import Footer from "./components/Footer";
+
 import ListFarm from "./pages/farmers/ListFarm";
 import "./App.css";
 
@@ -17,12 +20,16 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/farmer-register" element={<FarmerRegister />} />
-        <Route path="/investor-register" element={<InvestorRegister />} />
+        <Route path="/farmers/register" element={<FarmerRegister />} />
+        <Route path="/investors/register" element={<InvestorRegister />} />
         <Route path="/browse" element={<InvestorBrowse />} />
-        <Route path="/list-farm" element={<ListFarm />} />
-        <Route path="/farmer-kyc" element={<FarmerKyc />} />
+        <Route path="/listfarm" element={<ListFarm />} />
+        <Route path="/farmers/farmerkyc" element={<FarmerKyc />} />
+        <Route path="/investors/investorkyc" element={<InvestorKyc />} />
+
       </Routes>
+
+      <Footer/>
     </div>
   );
 }

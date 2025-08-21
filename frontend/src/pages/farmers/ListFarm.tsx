@@ -196,12 +196,8 @@ export default function AddFarm() {
 
         <button
           type="submit"
-          disabled={loading}
-          className={`py-3 rounded-xl font-semibold transition-all shadow-md flex items-center justify-center gap-2 ${
-            loading
-              ? "bg-gray-400 text-white cursor-not-allowed"
-              : "bg-green-700 text-white hover:bg-green-800"
-          }`}
+          className="bg-green-700 text-white py-3 rounded-full font-semibold hover:bg-green-800 transition-all shadow-md"
+
         >
           {loading && (
             <svg

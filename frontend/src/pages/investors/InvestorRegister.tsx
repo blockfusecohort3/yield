@@ -73,7 +73,8 @@ export default function InvestorRegister() {
         icon: <CheckCircle className="text-green-600" />,
       });
 
-      navigate("/browse");
+      navigate("/investors/investorkyc");
+
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -179,44 +180,45 @@ export default function InvestorRegister() {
             />
           </motion.div>
 
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-3 rounded-xl font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
-              loading
-                ? "bg-green-600 cursor-not-allowed text-gray-100"
-                : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"
-            }`}
-          >
-            {loading ? (
-              <>
-                <svg
-                  className="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
-                  />
-                </svg>
-                Registering...
-              </>
-            ) : (
-              "Register Investor"
-            )}
-          </button>
+         <button
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-full cursor-pointer font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
+    loading
+      ? "bg-green-600 cursor-not-allowed text-gray-100"
+      : "bg-green-600 hover:bg-green-700 transition-all ease-in-out duration-300 text-white"
+  }`}
+>
+  {loading ? (
+    <>
+      <svg
+        className="animate-spin h-5 w-5 text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+        />
+      </svg>
+      Registering...
+    </>
+  ) : (
+    "Register Investor"
+  )}
+</button>
+
+
         </form>
       </div>
     </div>

@@ -148,7 +148,7 @@ export default function FarmsList() {
                   </div>
                   <button
                     onClick={() => handleInvest(farm)}
-                    className="bg-green-600 text-white text-sm px-3 py-1 rounded-xl hover:bg-green-700 transition"
+                    className="bg-green-600 text-white text-sm px-3 py-1 rounded-full hover:bg-green-700 transition"
                   >
                     Invest
                   </button>
