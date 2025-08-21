@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, MapPin, CheckCircle, XCircle,ArrowLeft } from "lucide-react";
+import { User, MapPin, CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast, Toaster } from "sonner";
@@ -71,6 +71,7 @@ export default function FarmerRegister() {
       });
 
       navigate("/farmers/farmerkyc");
+
     } catch (err) {
       console.error(err);
       toast.error("Registration failed. Please try again.", {
@@ -80,6 +81,7 @@ export default function FarmerRegister() {
       setLoading(false);
     }
   };
+
 
   const shake = {
     initial: { x: 0 },
@@ -91,7 +93,7 @@ export default function FarmerRegister() {
 
   return (
     <>
-      {/* Toast Provider */}
+     
       <Toaster richColors position="top-center" closeButton />
 
      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-4">
@@ -107,6 +109,7 @@ export default function FarmerRegister() {
       />
                 <span>Investor Registery</span>
               </Link>
+
           <h1 className="text-2xl py-4 font-bold text-green-800 text-left lg:text-center">
             Register as a Farmer
           </h1>
@@ -115,7 +118,7 @@ export default function FarmerRegister() {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-            {/* First Name */}
+            
             <motion.div
               variants={shake}
               initial="initial"
@@ -137,7 +140,7 @@ export default function FarmerRegister() {
               />
             </motion.div>
 
-            {/* Last Name */}
+        
             <motion.div
               variants={shake}
               initial="initial"
@@ -159,7 +162,7 @@ export default function FarmerRegister() {
               />
             </motion.div>
 
-            {/* Address */}
+          
             <motion.div
               variants={shake}
               initial="initial"
@@ -218,6 +221,7 @@ export default function FarmerRegister() {
     "Register Farmer"
   )}
 </button>
+
           </form>
         </div>
       </div>

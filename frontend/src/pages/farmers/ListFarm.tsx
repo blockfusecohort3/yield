@@ -8,11 +8,10 @@ export default function AddFarm() {
   const [farmSize, setFarmSize] = useState("");
   const [valuePerShare, setValuePerShare] = useState("");
   const [totalShares, setTotalShares] = useState("");
-  const [availableShares, setAvailableShares] = useState("");
   const [farmImage, setFarmImage] = useState(null);
   const [fileKey, setFileKey] = useState(Date.now());
-
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   // Framer Motion shake animation
   const shake = {
@@ -32,7 +31,7 @@ export default function AddFarm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!currentUser) {
@@ -45,7 +44,6 @@ export default function AddFarm() {
       farmSize: farmSize.trim() === "",
       valuePerShare: valuePerShare.trim() === "",
       totalShares: totalShares.trim() === "",
-      availableShares: availableShares.trim() === "",
       farmImage: !farmImage,
     };
 
@@ -56,34 +54,43 @@ export default function AddFarm() {
       return;
     }
 
-    const farms = JSON.parse(localStorage.getItem("farms")) || [];
+    try {
+      setLoading(true);
 
-    const newFarm = {
-      id: Date.now(),
-      farmerName:
-        currentUser.fullName ||
-        `${currentUser.firstName} ${currentUser.lastName}`,
-      farmLocation,
-      farmSize,
-      valuePerShare,
-      totalShares,
-      availableShares,
-      farmImage,
-    };
+      // Simulate async saving (like API call)
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    localStorage.setItem("farms", JSON.stringify([...farms, newFarm]));
+      const farms = JSON.parse(localStorage.getItem("farms")) || [];
 
-    // Reset
-    setFarmLocation("");
-    setFarmSize("");
-    setValuePerShare("");
-    setTotalShares("");
-    setAvailableShares("");
-    setFarmImage(null);
-    setFileKey(Date.now());
-    setErrors({});
+      const newFarm = {
+        id: Date.now(),
+        farmerName: currentUser.fullName,
+        farmLocation,
+        farmSize,
+        valuePerShare,
+        totalShares,
+        availableShares: totalShares, 
+        farmImage,
+      };
 
-    toast.success("Farm added successfully! 🌱");
+      localStorage.setItem("farms", JSON.stringify([...farms, newFarm]));
+
+      // Reset
+      setFarmLocation("");
+      setFarmSize("");
+      setValuePerShare("");
+      setTotalShares("");
+      setFarmImage(null);
+      setFileKey(Date.now());
+      setErrors({});
+
+      toast.success("Farm added successfully! 🌱");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong, please try again ❌");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,7 +102,9 @@ export default function AddFarm() {
         <h2 className="text-2xl font-bold text-green-800 text-center">
           Add a New Farm
         </h2>
-        <p className="text-gray-500 text-center">Fill in your farm details below</p>
+        <p className="text-gray-500 text-center">
+          Fill in your farm details below
+        </p>
 
         {/* Farm Location */}
         <motion.input
@@ -161,22 +170,6 @@ export default function AddFarm() {
           }`}
         />
 
-        {/* Available Shares */}
-        <motion.input
-          type="number"
-          placeholder="Total Shares Available"
-          value={availableShares}
-          onChange={(e) => setAvailableShares(e.target.value)}
-          variants={shake}
-          initial="initial"
-          animate={errors.availableShares ? "animate" : "initial"}
-          className={`border p-3 rounded-xl focus:outline-none focus:ring w-full ${
-            errors.availableShares
-              ? "border-red-500 focus:ring-red-400"
-              : "border-gray-300 focus:ring-green-400"
-          }`}
-        />
-
         {/* Farm Image */}
         <motion.input
           key={fileKey}
@@ -204,8 +197,31 @@ export default function AddFarm() {
         <button
           type="submit"
           className="bg-green-700 text-white py-3 rounded-full font-semibold hover:bg-green-800 transition-all shadow-md"
+
         >
-          Add Farm
+          {loading && (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+          )}
+          {loading ? "Adding Farm..." : "Add Farm"}
         </button>
       </form>
     </div>

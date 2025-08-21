@@ -26,6 +26,7 @@ function App() {
         <Route path="/listfarm" element={<ListFarm />} />
         <Route path="/farmers/farmerkyc" element={<FarmerKyc />} />
         <Route path="/investors/investorkyc" element={<InvestorKyc />} />
+
       </Routes>
 
       <Footer/>

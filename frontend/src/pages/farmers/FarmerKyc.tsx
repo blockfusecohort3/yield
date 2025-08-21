@@ -25,7 +25,7 @@ export default function FarmerKyc() {
       toast.error("No pending farmer found. Please register first.", {
         icon: <XCircle className="text-red-500" />,
       });
-      navigate("/register");
+      navigate("/farmer-register"); 
     } else {
       setPendingFarmer(farmer);
     }
@@ -84,6 +84,7 @@ export default function FarmerKyc() {
 
     // Redirect to farmer dashboard
     navigate("/farmer-dashboard");
+
   };
 
   const shake = {
@@ -101,13 +102,13 @@ export default function FarmerKyc() {
         <div className="text-center mb-6">
           <h1 className="text-3xl font-extrabold text-green-800 flex items-center justify-center gap-2">
             🌾 Farmer KYC Verification
+
           </h1>
           <p className="text-gray-600 mt-2">
             Please complete your KYC to access the Farmer Dashboard.
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* DOB */}
           <motion.div
@@ -174,7 +175,6 @@ export default function FarmerKyc() {
             />
           </motion.div>
 
-          {/* Optional Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload ID Document (optional)
@@ -187,7 +187,6 @@ export default function FarmerKyc() {
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-green-700 text-white py-3 rounded-full hover:bg-green-800 transition font-semibold"
