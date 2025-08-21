@@ -43,10 +43,20 @@ A blockchain-powered agro-finance platform that:
 - ✅ Investor dashboard to browse farms  
 - ✅ Smart contract escrow for milestone-based funding  
 - ✅ Basic ratings & verification badges  
-- 🔄 Insurance integration (in progress)  
+
 
 
 ---
+
+
+## 🔄 Ongoing Development
+- 🛡 **Insurance Integration**: Farmers can opt-in for insurance with whitelisted providers to build credibility and protect against risks.
+
+## 🔮 Future Implementation
+- 📱 **Mobile/USSD onboarding for rural farmers**: Expand accessibility to farmers without smartphones or internet.  
+- 🔜 **Yield-linked repayment automation (via co-ops/off-takers)**: Automated repayment models tied to farm output.  
+
+
 
 ## 💼 Business Model
 - Small commission on investments.  
