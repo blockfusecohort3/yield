@@ -31,10 +31,10 @@ export const HeroSection: React.FC = () => {
             
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Sustainable{' '} <br />
+               Empowering  {' '} <br />
                <div className='flex items-center gap-2'>
                  <span className="inline-flex items-center gap-2">
-                  farming
+                  farmers with 
 
                 </span>
      
@@ -72,13 +72,12 @@ export const HeroSection: React.FC = () => {
         }
       `}</style>
                </div>
-                for a better tomorrow.
-              </h1>
+easy financing              </h1>
               
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl">
-                Brings cutting-edge technology and innovative practices to the world of agriculture, 
-                helping you maximize yields, reduce waste, and enhance sustainability.
-              </p>
+             <p>
+  Connects verified farmers with investors, ensures milestone-based funding, and builds trust through ratings and transparent progress tracking.
+</p>
+
             </div>
             
            <div className="flex flex-col sm:flex-row gap-4">

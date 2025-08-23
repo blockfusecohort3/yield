@@ -6,36 +6,37 @@ import { ChevronRight, ArrowUpRight, Leaf, Cpu, Droplets } from "lucide-react";
 const Features = () => {
   const [activeAccordion, setActiveAccordion] = useState(0);
 
-  const features = [
-    {
-      title: "Access Affordable Loans",
-      description:
-        "Unlock financial opportunities through DeFi lending pools, tailored for farmers to expand operations without burdensome traditional systems.",
-      icon: ArrowUpRight,
-      color: "green",
-    },
-    {
-      title: "Grow Sustainably with Green Finance",
-      description:
-        "Access eco-friendly funding options that promote sustainable farming practices while ensuring long-term profitability and environmental stewardship.",
-      icon: Leaf,
-      color: "emerald",
-    },
-    {
-      title: "Leverage Cutting-Edge Agricultural Tech",
-      description:
-        "Integrate smart farming technologies, IoT sensors, and data analytics to optimize crop yields and make informed decisions.",
-      icon: Cpu,
-      color: "blue",
-    },
-    {
-      title: "Save Water and Resources Efficiently",
-      description:
-        "Implement water-smart irrigation systems and resource management tools to reduce waste while maximizing agricultural productivity.",
-      icon: Droplets,
-      color: "cyan",
-    },
-  ];
+const features = [
+  {
+    title: "Verified Farmer Onboarding",
+    description:
+      "Farmers can register and upload NIN, BVN, government IDs, and farm records to get verified and gain investor trust.",
+    icon: ArrowUpRight,
+    color: "green",
+  },
+  {
+    title: "Invest with Confidence",
+    description:
+      "Investors can browse verified farmers, see ratings and insurance info, and fund projects knowing smart contracts secure the process.",
+    icon: Leaf,
+    color: "emerald",
+  },
+  {
+    title: "Milestone-Based Funding",
+    description:
+      "Funds are released in stages via smart contracts as farmers hit verified milestones, ensuring accountability and transparency.",
+    icon: Cpu,
+    color: "blue",
+  },
+  {
+    title: "Build Reputation & Trust",
+    description:
+      "Farmers earn badges and ratings based on performance, giving investors confidence and opening doors for bigger future funding.",
+    icon: Droplets,
+    color: "cyan",
+  },
+];
+
 
   return (
     <section id="features" className="relative bg-gradient-to-b from green-50 via-green-100 to-green-50 w-full">
